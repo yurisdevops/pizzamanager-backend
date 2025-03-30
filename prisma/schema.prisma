@@ -1,0 +1,95 @@
+// Configuração do Prisma Client, que será usado para acessar o banco de dados na aplicação
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Configuração da fonte de dados, especificando que o banco de dados utilizado será PostgreSQL
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // O URL de conexão é armazenado em uma variável de ambiente para segurança
+}
+
+// Criar uma migration: use o comando "yarn prisma migrate dev"
+
+// Modelo User representa os usuários do sistema
+model User {
+  id       String @id @default(uuid()) // ID único gerado automaticamente como UUID
+  name     String // Nome do usuário
+  email    String @unique // Email único para evitar duplicidade
+  password String // Senha do usuário
+
+  created_at DateTime? @default(now()) // Data de criação registrada automaticamente
+  updated_at DateTime? @default(now()) // Data de atualização registrada automaticamente
+
+  @@map("users") // Mapeia este modelo para a tabela "users" no banco de dados
+}
+
+// Modelo Category representa as categorias de produtos
+model Category {
+  id   String @id @default(uuid()) // ID único da categoria, gerado como UUID
+  name String // Nome da categoria
+
+  created_at DateTime? @default(now()) // Data de criação registrada automaticamente
+  updated_at DateTime? @default(now()) // Data de atualização registrada automaticamente
+
+  products Product[] // Relação um-para-muitos com o modelo Product (uma categoria tem vários produtos)
+
+  @@map("categories") // Mapeia este modelo para a tabela "categories" no banco de dados
+}
+
+// Modelo Product representa os produtos do sistema
+model Product {
+  id          String @id @default(uuid()) // ID único do produto, gerado como UUID
+  name        String // Nome do produto
+  price       String // Preço do produto
+  description String // Descrição do produto
+  banner      String // URL do banner associado ao produto
+
+  created_at DateTime? @default(now()) // Data de criação registrada automaticamente
+  updated_at DateTime? @default(now()) // Data de atualização registrada automaticamente
+
+  category Category @relation(fields: [category_id], references: [id])
+  // Define uma relação muitos-para-um com Category. "category_id" referencia o campo "id" de Category
+
+  category_id String // Chave estrangeira que conecta o produto à categoria
+
+  items Item[] // Relação um-para-muitos com o modelo Item (um produto pode estar em vários itens)
+
+  @@map("products") // Mapeia este modelo para a tabela "products" no banco de dados
+}
+
+// Modelo Order representa os pedidos do sistema
+model Order {
+  id     String  @id @default(uuid()) // ID único do pedido, gerado como UUID
+  table  Int // Número da mesa associada ao pedido
+  status Boolean @default(false) // Status do pedido (false = não concluído, true = concluído)
+  draft  Boolean @default(true) // Indica se o pedido é um rascunho (true = rascunho)
+  name   String? // Nome associado ao pedido (opcional)
+
+  created_at DateTime? @default(now()) // Data de criação registrada automaticamente
+  updated_at DateTime? @default(now()) // Data de atualização registrada automaticamente
+
+  items Item[] // Relação um-para-muitos com o modelo Item (um pedido pode conter vários itens)
+
+  @@map("orders") // Mapeia este modelo para a tabela "orders" no banco de dados
+}
+
+// Modelo Item conecta produtos e pedidos
+model Item {
+  id     String @id @default(uuid()) // ID único do item, gerado como UUID
+  amount Int // Quantidade do produto neste item
+
+  product_id String // Chave estrangeira que referencia o ID de um produto
+  order_id   String // Chave estrangeira que referencia o ID de um pedido
+
+  created_at DateTime? @default(now()) // Data de criação registrada automaticamente
+  updated_at DateTime? @default(now()) // Data de atualização registrada automaticamente
+
+  order Order @relation(fields: [order_id], references: [id])
+  // Relaciona o item a um pedido (muitos-para-um)
+
+  product Product @relation(fields: [product_id], references: [id])
+  // Relaciona o item a um produto (muitos-para-um)
+
+  @@map("items") // Mapeia este modelo para a tabela "items" no banco de dados
+}
