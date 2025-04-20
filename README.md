@@ -4,7 +4,7 @@
 
 O **PizzaManager** é o backend de uma plataforma moderna para gestão de pizzarias, desenvolvido com **Node.js**, **TypeScript** e **Prisma ORM**. A aplicação fornece uma API REST segura e escalável, com suporte a autenticação JWT, upload de imagens via Multer e organização clara dos recursos de negócio. O banco de dados utilizado é o **PostgreSQL**, hospedado na plataforma **Neon.tech**.
 
-## 🧭 Índice
+## Índice
 
 - [Descrição do Projeto](#descrição-do-projeto)
 - [Funcionalidades](#funcionalidades)
@@ -14,7 +14,7 @@ O **PizzaManager** é o backend de uma plataforma moderna para gestão de pizzar
 - [Estrutura de Pastas](#estrutura-de-pastas)
 - [Contato](#contato)
 
-## 📄 Descrição do Projeto
+## Descrição do Projeto
 
 A API do **PizzaManager** fornece endpoints REST para:
 
@@ -26,7 +26,7 @@ A API do **PizzaManager** fornece endpoints REST para:
 
 ---
 
-## ✅ Funcionalidades
+## Funcionalidades
 
 - **Autenticação:**
   - Login com JWT.
@@ -51,7 +51,7 @@ A API do **PizzaManager** fornece endpoints REST para:
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Node.js & Express:** Servidor HTTP e gerenciamento de rotas.
 - **TypeScript:** Tipagem estática para maior robustez.
@@ -64,7 +64,7 @@ A API do **PizzaManager** fornece endpoints REST para:
 
 ---
 
-## 🚀 Como Usar
+## Como Usar
 
 ### 1. Clonar o Repositório
 
@@ -88,7 +88,7 @@ DATABASE_URL="url_do_banco_gerado_pelo_neon.tech"
 JWT_SECRET="seu_token_secreto"
 ```
 
-> 🔐 A URL do banco pode ser obtida na dashboard da [Neon.tech](https://neon.tech).
+ A URL do banco pode ser obtida na dashboard da [Neon.tech](https://neon.tech).
 
 ### 4. Configurar o Prisma
 
@@ -107,7 +107,7 @@ A API estará disponível em `http://localhost:3333`
 
 ---
 
-## 📜 Scripts Disponíveis
+## Scripts Disponíveis
 
 - `npm run dev`: Inicia o servidor em modo desenvolvimento.
 - `npm run build`: Compila o projeto para produção.
@@ -117,7 +117,7 @@ A API estará disponível em `http://localhost:3333`
 
 ---
 
-## 🗂 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 📦 src
@@ -130,7 +130,7 @@ A API estará disponível em `http://localhost:3333`
 
 ---
 
-## 📬 Contato
+## Contato
 
 Desenvolvido por [Yuri Souza](https://github.com/yurisdevops)  
 📧 **Email:** yurimachado.dev@gmail.com
